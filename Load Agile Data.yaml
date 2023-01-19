@@ -1,0 +1,112 @@
+alias: LoadAgile
+description: ""
+trigger:
+  - platform: time
+    at: "18:00:00"
+condition: []
+action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.octopus_agile_range_ordered
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number1 }}"
+    target:
+      entity_id: input_text.session_1_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number2 }}"
+    target:
+      entity_id: input_text.session_2_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number3 }}"
+    target:
+      entity_id: input_text.session_3_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number4 }}"
+    target:
+      entity_id: input_text.session_4_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number5 }}"
+    target:
+      entity_id: input_text.session_5_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number6 }}"
+    target:
+      entity_id: input_text.session_6_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number7 }}"
+    target:
+      entity_id: input_text.session_7_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number8 }}"
+    target:
+      entity_id: input_text.session_8_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number9 }}"
+    target:
+      entity_id: input_text.session_9_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number10 }}"
+    target:
+      entity_id: input_text.session_10_detail
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number1 }}"
+    target:
+      entity_id: input_text.session_1_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number2 }}"
+    target:
+      entity_id: input_text.session_2_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number3 }}"
+    target:
+      entity_id: input_text.session_3_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number4 }}"
+    target:
+      entity_id: input_text.session_4_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number5 }}"
+    target:
+      entity_id: input_text.session_5_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number6 }}"
+    target:
+      entity_id: input_text.session_6_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number7 }}"
+    target:
+      entity_id: input_text.session_7_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number8 }}"
+    target:
+      entity_id: input_text.session_8_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number9 }}"
+    target:
+      entity_id: input_text.session_9_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number10 }}"
+    target:
+      entity_id: input_text.session_10_cost
+mode: single

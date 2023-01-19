@@ -1,0 +1,219 @@
+# Dashboard so far still to add solar and SoC 
+views:
+  - theme: Backend-selected
+    title: Octopus Agile Control
+    icon: mdi:home-lightning-bolt-outline
+    type: panel
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - square: false
+                columns: 6
+                type: grid
+                cards:
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_1_enable
+                    name: Enable Session 1
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_1_detail
+                        name: session1
+                        secondary_info: none
+                      - entity: input_text.session_1_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_1
+                        name: 'Runs In '
+                        secondary_info: none
+                    show_header_toggle: false
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_2_enable
+                    name: Enable Session 2
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_2_detail
+                        name: Session2
+                      - entity: input_text.session_2_cost
+                        name: Cost
+                        secondary_info: none
+                      - entity: sensor.minutes_until_session_2
+                        name: Runs In
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_3_enable
+                    name: Enable Session 3
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_3_detail
+                        name: Session3
+                      - entity: input_text.session_3_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_3
+                        name: Runs In
+          - type: horizontal-stack
+            cards:
+              - square: false
+                columns: 6
+                type: grid
+                cards:
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_4_enable
+                    name: Enable Session 4
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_4_detail
+                        name: session4
+                        secondary_info: none
+                      - entity: input_text.session_4_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_4
+                        name: 'Runs In '
+                        secondary_info: none
+                    show_header_toggle: false
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_5_enable
+                    name: Enable Session 5
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_5_detail
+                        name: Session5
+                      - entity: input_text.session_5_cost
+                        name: Cost
+                        secondary_info: none
+                      - entity: sensor.minutes_until_session_5
+                        name: Runs In
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_6_enable
+                    name: Enable Session 6
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_6_detail
+                        name: Session6
+                      - entity: input_text.session_6_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_6
+                        name: Runs In
+          - type: horizontal-stack
+            cards:
+              - square: false
+                columns: 6
+                type: grid
+                cards:
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_7_enable
+                    name: Enable Session 7
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_7_detail
+                        name: session7
+                        secondary_info: none
+                      - entity: input_text.session_7_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_7
+                        name: 'Runs In '
+                        secondary_info: none
+                    show_header_toggle: false
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_8_enable
+                    name: Enable Session 8
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_8_detail
+                        name: Session8
+                      - entity: input_text.session_8_cost
+                        name: Cost
+                        secondary_info: none
+                      - entity: sensor.minutes_until_session_8
+                        name: Runs In
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_9_enable
+                    name: Enable Session 9
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_9_detail
+                        name: Session9
+                      - entity: input_text.session_9_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_9
+                        name: Runs In
+          - type: horizontal-stack
+            cards:
+              - square: false
+                columns: 6
+                type: grid
+                cards:
+                  - show_name: true
+                    show_icon: true
+                    type: button
+                    tap_action:
+                      action: toggle
+                    entity: input_boolean.session_10_enable
+                    name: Enable Session 10
+                    show_state: true
+                    icon_height: 25px
+                  - type: entities
+                    entities:
+                      - entity: input_text.session_10_detail
+                        name: session10
+                        secondary_info: none
+                      - entity: input_text.session_10_cost
+                        name: Cost
+                      - entity: sensor.minutes_until_session_10
+                        name: 'Runs In '
+                        secondary_info: none
+                    show_header_toggle: false

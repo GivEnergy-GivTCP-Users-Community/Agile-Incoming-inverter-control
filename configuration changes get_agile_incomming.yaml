@@ -1,0 +1,147 @@
+# extra additions required for agile_incomming.
+
+# Templates
+sensor:
+ - platform: template
+   sensors:
+
+    oct_ag_run1:
+            friendly_name: "agile_run1"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number1 }}'
+            unique_id: arn1             
+            
+    minutes_until_session_1:
+            friendly_name: "Minutes until next session 1"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run1'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus1
+            
+    oct_ag_run2:
+            friendly_name: "agile_run2"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number2 }}'
+            unique_id: arn2             
+            
+    minutes_until_session_2:
+            friendly_name: "Minutes until next session 2"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run2'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus2
+            
+    oct_ag_run3:
+            friendly_name: "agile_run3"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number3 }}'
+            unique_id: arn3             
+            
+    minutes_until_session_3:
+            friendly_name: "Minutes until next session 3"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run3'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus3
+            
+    oct_ag_run4:
+            friendly_name: "agile_run4"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number4 }}'
+            unique_id: arn4             
+            
+    minutes_until_session_4:
+            friendly_name: "Minutes until next session 4"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run1'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus4
+            
+    oct_ag_run5:
+            friendly_name: "agile_run5"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number5 }}'
+            unique_id: arn5             
+            
+    minutes_until_session_5:
+            friendly_name: "Minutes until next session 5"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run5'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus5
+
+    oct_ag_run6:
+            friendly_name: "agile_run6"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number6 }}'
+            unique_id: arn6             
+            
+    minutes_until_session_6:
+            friendly_name: "Minutes until next session 6"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run6'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus6
+            
+    oct_ag_run7:
+            friendly_name: "agile_run7"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number7 }}'
+            unique_id: arn7             
+            
+    minutes_until_session_7:
+            friendly_name: "Minutes until next session 7"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run7'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus7
+            
+    oct_ag_run8:
+            friendly_name: "agile_run8"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number8 }}'
+            unique_id: arn8             
+            
+    minutes_until_session_8:
+            friendly_name: "Minutes until next session 8"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run8'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus8
+            
+    oct_ag_run9:
+            friendly_name: "agile_run9"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number9 }}'
+            unique_id: arn9             
+            
+    minutes_until_session_9:
+            friendly_name: "Minutes until next session 9"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run9'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus9
+            
+    oct_ag_run10:
+            friendly_name: "agile_run10"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number10 }}'
+            unique_id: arn10             
+            
+    minutes_until_session_10:
+            friendly_name: "Minutes until next session 10"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run10'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            unique_id: mus10            
+            
+# command line entries 
+
+ - platform: command_line
+   command: "python3 /config/pyscripts/get_agile_incomming_ordered.py"
+   scan_interval: 315360000 
+   value_template: '{{value_json.Run_number1}}'
+   json_attributes:
+      - Run_number1
+      - Run_number2
+      - Run_number3
+      - Run_number4
+      - Run_number5
+      - Run_number6
+      - Run_number7
+      - Run_number8
+      - Run_number9
+      - Run_number10
+      - cost_number1
+      - cost_number2
+      - cost_number3
+      - cost_number4
+      - cost_number5
+      - cost_number6
+      - cost_number7
+      - cost_number8
+      - cost_number9
+      - cost_number10
+   name: octopus_agile_range_ordered
+   unique_id: octagrangeinord1
+
+ - platform: time_date
+   display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_utc'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
