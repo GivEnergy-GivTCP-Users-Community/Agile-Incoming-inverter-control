@@ -1,4 +1,4 @@
-#!/usr/bin/Get_Agile_incomming v2 fix applied value stuck at var 10
+#!/usr/bin/Get_Agile_incoming v2 fix applied value stuck at var 10
 
 # importing the requests library
 import requests
