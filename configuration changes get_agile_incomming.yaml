@@ -1,4 +1,4 @@
-# extra additions required for agile_incomming.
+# extra additions required for agile_incoming.
 
 # Templates
 sensor:
@@ -108,7 +108,7 @@ sensor:
 # command line entries 
 
  - platform: command_line
-   command: "python3 /config/pyscripts/get_agile_incomming_ordered.py"
+   command: "python3 /config/pyscripts/get_agile_incoming_ordered.py"
    scan_interval: 315360000 
    value_template: '{{value_json.Run_number1}}'
    json_attributes:
