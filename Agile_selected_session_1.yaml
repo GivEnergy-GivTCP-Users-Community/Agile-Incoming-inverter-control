@@ -10,9 +10,15 @@ trigger:
       minutes: 0
       seconds: 30
 condition:
-  - condition: state
-    entity_id: input_boolean.session_1_enable
-    state: "on"
+  - condition: or
+    conditions:
+      - condition: state
+        entity_id: input_boolean.session_1_enable
+        state: "on"
+      - condition: template
+        value_template: >-
+          {{(states('sensor.givtcp_ed2151g186_soc')| float(0)) <
+          (states('input_number.target_soc') | float(0)) }}
 action:
   - variables:
       "StartTime:": "{% set startdate = states('input_text.session_1_start') %}"
