@@ -2,7 +2,7 @@ alias: LoadAgile
 description: ""
 trigger:
   - platform: time
-    at: "18:00:00"
+    at: "17:10:00"
 condition: []
 action:
   - service: homeassistant.update_entity
@@ -109,4 +109,255 @@ action:
       value: "{{ states.sensor.octopus_agile_range_ordered.attributes.cost_number10 }}"
     target:
       entity_id: input_text.session_10_cost
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time1 }}"
+    target:
+      entity_id: input_text.session_1_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time2 }}"
+    target:
+      entity_id: input_text.session_2_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time3 }}"
+    target:
+      entity_id: input_text.session_3_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time4 }}"
+    target:
+      entity_id: input_text.session_4_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time5 }}"
+    target:
+      entity_id: input_text.session_5_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time6 }}"
+    target:
+      entity_id: input_text.session_6_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time7 }}"
+    target:
+      entity_id: input_text.session_7_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time8 }}"
+    target:
+      entity_id: input_text.session_8_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time9 }}"
+    target:
+      entity_id: input_text.session_9_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.start_time10 }}"
+    target:
+      entity_id: input_text.session_10_start
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time1 }}"
+    target:
+      entity_id: input_text.session_1_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time2 }}"
+    target:
+      entity_id: input_text.session_2_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time3 }}"
+    target:
+      entity_id: input_text.session_3_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time4 }}"
+    target:
+      entity_id: input_text.session_4_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time5 }}"
+    target:
+      entity_id: input_text.session_5_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time6 }}"
+    target:
+      entity_id: input_text.session_6_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time7 }}"
+    target:
+      entity_id: input_text.session_7_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time8 }}"
+    target:
+      entity_id: input_text.session_8_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time9 }}"
+    target:
+      entity_id: input_text.session_9_end
+  - service: input_text.set_value
+    data:
+      value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time10 }}"
+    target:
+      entity_id: input_text.session_10_end
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_1_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_1_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_1_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_2_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_2_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_2_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_3_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_3_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_3_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_4_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_4_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_4_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_5_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_5_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_5_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_6_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_6_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_6_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_7_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_7_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_7_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_8_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_8_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_8_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_9_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_9_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_9_enable
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.session_10_cost')|float >=
+          states('sensor.oct_ag_mean1')|float }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.session_10_enable
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.session_10_enable
 mode: single
+
