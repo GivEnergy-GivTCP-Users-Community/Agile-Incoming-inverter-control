@@ -1,15 +1,33 @@
 # extra additions required for agile_incoming.
 
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
 # Templates
 sensor:
  - platform: template
    sensors:
-
     oct_ag_run1:
             friendly_name: "agile_run1"
             value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.Run_number1 }}'
-            unique_id: arn1             
+            unique_id: arn1
             
+    oct_ag_min1:
+            friendly_name: "agile_min1"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.min_rate1 }}'
+            unique_id: armin1
+            
+    oct_ag_max1:
+            friendly_name: "agile_max1"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.max_rate1 }}'
+            unique_id: armax1 
+            
+    oct_ag_mean1:
+            friendly_name: "agile_mean1"
+            value_template: '{{ states.sensor.octopus_agile_range_ordered.attributes.mean_rate1 }}'
+            unique_id: armean1             
+         
     minutes_until_session_1:
             friendly_name: "Minutes until next session 1"
             value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run1'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
@@ -42,7 +60,7 @@ sensor:
             
     minutes_until_session_4:
             friendly_name: "Minutes until next session 4"
-            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run1'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
+            value_template: "{% set diff = as_local(as_datetime(states('sensor.oct_ag_run4'))) - now() %}{{ (diff.total_seconds() / 60) | int(0) }}"
             unique_id: mus4
             
     oct_ag_run5:
@@ -108,7 +126,7 @@ sensor:
 # command line entries 
 
  - platform: command_line
-   command: "python3 /config/pyscripts/get_agile_incoming_ordered.py"
+   command: "python3 /config/pyscripts/get_agile_incomming_ordered.py"
    scan_interval: 315360000 
    value_template: '{{value_json.Run_number1}}'
    json_attributes:
@@ -132,16 +150,28 @@ sensor:
       - cost_number8
       - cost_number9
       - cost_number10
+      - start_time1
+      - start_time2
+      - start_time3
+      - start_time4
+      - start_time5
+      - start_time6
+      - start_time7
+      - start_time8
+      - start_time9
+      - start_time10
+      - end_time1
+      - end_time2
+      - end_time3
+      - end_time4
+      - end_time5
+      - end_time6
+      - end_time7
+      - end_time8
+      - end_time9
+      - end_time10
+      - min_rate1
+      - max_rate1
+      - mean_rate1
    name: octopus_agile_range_ordered
    unique_id: octagrangeinord1
-
- - platform: time_date
-   display_options:
-      - 'time'
-      - 'date'
-      - 'date_time'
-      - 'date_time_utc'
-      - 'date_time_iso'
-      - 'time_date'
-      - 'time_utc'
-      - 'beat'
