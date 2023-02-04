@@ -10,7 +10,7 @@ trigger:
       minutes: 0
       seconds: 30
 condition:
-  - condition: or
+  - condition: and
     conditions:
       - condition: state
         entity_id: input_boolean.session_1_enable
