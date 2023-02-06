@@ -1,0 +1,27 @@
+alias: agile_cost_loading
+fields:
+  ses_enabled:
+    description: the session enabled name
+    example: session_1_enable
+  ses_cost:
+    description: the session cost name
+    example: session_1_cost
+sequence:
+  - if:
+      - condition: template
+        value_template: >-
+          {{ states('input_text.'~ses_cost)|float >=
+          (states('sensor.oct_ag_mean1')|float -
+          states('input_number.target_max_price') | float(0)) }}
+    then:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: "{{ 'input_boolean.'~ses_enabled }}"
+    else:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: "{{ 'input_boolean.'~ses_enabled }}"
+mode: single
+icon: mdi:calculator-variant
