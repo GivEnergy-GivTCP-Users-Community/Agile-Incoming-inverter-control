@@ -74,7 +74,7 @@ sequence:
           title: "{{title}}"
           notification_id: "{{notification_id}}"
       - service: homeassistant.turn_off
-        entity_id: script.test
+        entity_id: script.agile_charge_battery
   - if:
       - condition: template
         value_template: >-
