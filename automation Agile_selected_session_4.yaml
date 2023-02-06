@@ -8,7 +8,7 @@ trigger:
     for:
       hours: 0
       minutes: 0
-      seconds: 40
+      seconds: 30
 action:
   - service: script.agile_charge_battery
     data:
