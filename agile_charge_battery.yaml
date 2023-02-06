@@ -45,13 +45,13 @@ sequence:
         value_template: "{{is_state('input_boolean.'~ses_enabled, 'on') }}"
       - condition: template
         value_template: >-
-          {{(states('sensor.givtcp_ed2151g186_soc')| float) <
+          {{(states('sensor.givtcp_yourinverter_soc')| float) <
           (states('input_number.target_soc') | float(0)) }}
     then:
       - service: switch.turn_off
         data: {}
         target:
-          entity_id: switch.givtcp_ed2151g186_enable_charge_schedule
+          entity_id: switch.givtcp_yourinverter_enable_charge_schedule
       - delay:
           hours: 0
           minutes: 0
@@ -61,7 +61,7 @@ sequence:
         data:
           option: "{{states('input_text.'~ses_start)}}"
         target:
-          entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+          entity_id: select.givtcp_yourinverter_charge_start_time_slot_1
       - delay:
           hours: 0
           minutes: 1
@@ -78,7 +78,7 @@ sequence:
   - if:
       - condition: template
         value_template: >-
-          "{{ states('select.givtcp_ed2151g186_charge_start_time_slot_1') !=
+          "{{ states('select.givtcp_yourinverter_charge_start_time_slot_1') !=
           states('input_text.'~ses_start) }}"
     then:
       - service: persistent_notification.create
@@ -90,7 +90,7 @@ sequence:
         data:
           option: "{{states('input_text.'~ses_start)}}"
         target:
-          entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+          entity_id: select.givtcp_yourinverter_charge_start_time_slot_1
       - delay:
           hours: 0
           minutes: 1
@@ -111,7 +111,7 @@ sequence:
     data:
       option: "{{states('input_text.'~ses_end)}}"
     target:
-      entity_id: select.givtcp_ed2151g186_charge_end_time_slot_1
+      entity_id: select.givtcp_yourinverter_charge_end_time_slot_1
   - delay:
       hours: 0
       minutes: 1
@@ -120,7 +120,7 @@ sequence:
   - if:
       - condition: template
         value_template: >-
-          "{{ states('select.givtcp_ed2151g186_charge_end_time_slot_1') !=
+          "{{ states('select.givtcp_yourinverter_charge_end_time_slot_1') !=
           states('input_text.'~ses_end) }}"
     then:
       - service: persistent_notification.create
@@ -132,7 +132,7 @@ sequence:
         data:
           option: "{{states('input_text.'~ses_end)}}"
         target:
-          entity_id: select.givtcp_ed2151g186_charge_end_time_slot_1
+          entity_id: select.givtcp_yourinverter_charge_end_time_slot_1
       - delay:
           hours: 0
           minutes: 1
@@ -152,7 +152,7 @@ sequence:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.givtcp_ed2151g186_enable_charge_schedule
+      entity_id: switch.givtcp_yourinverter_enable_charge_schedule
   - delay:
       hours: 0
       minutes: 0
