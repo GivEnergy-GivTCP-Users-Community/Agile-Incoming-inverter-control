@@ -209,155 +209,45 @@ action:
       value: "{{ states.sensor.octopus_agile_range_ordered.attributes.end_time10 }}"
     target:
       entity_id: input_text.session_10_end
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_1_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_1_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_1_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_2_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_2_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_2_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_3_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_3_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_3_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_4_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_4_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_4_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_5_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_5_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_5_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_6_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_6_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_6_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_7_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_7_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_7_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_8_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_8_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_8_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_9_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_9_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_9_enable
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_text.session_10_cost')|float >=
-          states('sensor.oct_ag_mean1')|float }}
-    then:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id: input_boolean.session_10_enable
-    else:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id: input_boolean.session_10_enable
+ - service: script.agile_cost_loading
+    data:
+      ses_cost: session_1_cost
+      ses_enabled: session_1_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_2_cost
+      ses_enabled: session_2_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_3_cost
+      ses_enabled: session_3_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_4_cost
+      ses_enabled: session_4_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_5_cost
+      ses_enabled: session_5_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_6_cost
+      ses_enabled: session_6_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_7_cost
+      ses_enabled: session_7_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_8_cost
+      ses_enabled: session_8_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_9_cost
+      ses_enabled: session_9_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_10_cost
+      ses_enabled: session_10_enable
 mode: single
 
