@@ -123,7 +123,7 @@ views:
                         secondary_info: none
                       - entity: input_text.session_7_cost
                         name: Cost
-                      - entity: input_text.session_7start
+                      - entity: input_text.session_7_start
                         name: Start Time
                       - entity: input_text.session_7_end
                         name: End Time
@@ -217,7 +217,7 @@ views:
                   - entity: input_number.target_sol_forecast
                     name: Set Sol Forecast Limit
                   - entity: input_number.target_max_price
-                    name: Set Max Price
+                    name: Set Price weight
               - type: custom:button-card
                 color_type: blank-card
 title: Agile Control
