@@ -1,0 +1,33 @@
+alias: Agile_selected_session_6
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.minutes_until_session_6
+    to: "0"
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 60
+action:
+  - service: script.agile_charge_battery
+    data:
+      title: session 6
+      message: >-
+        session 6 ran successfully at {{"\r\n"}}'({{now().strftime("%Y-%m-%d
+        %H:%M:%S")}})' {{"\r\n"}} cost is
+        "{{states('input_text.session_6_cost')}}"
+      messagenotenabled: session 6 is not enabled
+      messagefailstart: session 6  failed to load start time retrying
+      messagefailend: session 6  failed to load end time retrying
+      messageloadstart: >-
+        start time of "{{states('input_text.session_6_start')}}" {{"\r\n"}}
+        Loaded
+      messageloadend: end time of "{{states('input_text.session_6_end')}}" {{"\r\n"}} Loaded
+      notification_id: id-006
+      ses_detail: session_6_detail
+      ses_cost: session_6_cost
+      ses_start: session_6_start
+      ses_end: session_6_end
+      ses_enabled: session_6_enable
+mode: restart
