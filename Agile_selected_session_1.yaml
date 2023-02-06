@@ -9,86 +9,25 @@ trigger:
       hours: 0
       minutes: 0
       seconds: 30
-condition:
-  - condition: and
-    conditions:
-      - condition: state
-        entity_id: input_boolean.session_1_enable
-        state: "on"
-      - condition: template
-        value_template: >-
-          {{(states('sensor.givtcp_ed2151g186_soc')| float(0)) <
-          (states('input_number.target_soc') | float(0)) }}
 action:
-  - variables:
-      "StartTime:": "{% set startdate = states('input_text.session_1_start') %}"
-      "EndTime:": "{% set enddate = states('input_text.session_1_end') %}"
-  - service: select.select_option
+  - service: script.agile_charge_battery
     data:
-      option: "{{states('input_text.session_1_start')}}"
-    target:
-      entity_id: select.givtcp_edxxxxxxx_charge_start_time_slot_1
-  - delay:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('select.givtcp_edxxxxxxx_charge_start_time_slot_1') !=
-          states('input_text.session_1_start') }}
-    then:
-      - service: notify.persistent_notification
-        data:
-          message: "Inverter: Failed to set StartTime... trying again."
-      - service: select.select_option
-        data:
-          option: "{{states('input_text.session_1_start')}}"
-        target:
-          entity_id: select.givtcp_edxxxxxxx_charge_start_time_slot_1
-      - delay:
-          hours: 0
-          minutes: 1
-          seconds: 0
-          milliseconds: 0
-  - service: select.select_option
-    data:
-      option: "{{states('input_text.session_1_end')}}"
-    target:
-      entity_id: select.givtcp_edxxxxxxx_charge_end_time_slot_1
-  - delay:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('select.givtcp_edxxxxxx_charge_end_time_slot_1') !=
-          states('input_text.session_1_end') }}
-    then:
-      - service: notify.persistent_notification
-        data:
-          message: "Inverter: Failed to set EndTime... trying again."
-      - service: select.select_option
-        data:
-          option: "{{states('input_text.session_1_end')}}"
-        target:
-          entity_id: select.givtcp_edxxxxxxx_charge_end_time_slot_1
-      - delay:
-          hours: 0
-          minutes: 1
-          seconds: 0
-          milliseconds: 0
-  - service: input_text.set_value
-    data:
-      value: >-
-        Running session 1 at {{"\r\n"}} '({{now().strftime("%Y-%m-%d
+      title: session 1
+      message: >-
+        session 1 ran successfully at {{"\r\n"}}'({{now().strftime("%Y-%m-%d
         %H:%M:%S")}})' {{"\r\n"}} cost is
-        "{{states('input_text.session_1_cost')}}" {{"\r\n"}} start time is 
-        "{{states('input_text.session_1_start')}}" {{"\r\n"}} end time is
-        "{{states('input_text.session_1_end')}}"
-    target:
-      entity_id: input_text.emulate_agile_action
+        "{{states('input_text.session_1_cost')}}"
+      messagenotenabled: session 1 is not enabled
+      messagefailstart: inverter failed to load start time retrying
+      messagefailend: inverter failed to load end time retrying
+      messageloadstart: >-
+        start time of "{{states('input_text.session_1_start')}}" {{"\r\n"}}
+        Loaded
+      messageloadend: end time of "{{states('input_text.session_1_end')}}" {{"\r\n"}} Loaded
+      notification_id: id-001
+      ses_detail: session_1_detail
+      ses_cost: session_1_cost
+      ses_start: session_1_start
+      ses_end: session_1_end
+      ses_enabled: session_1_enable
 mode: restart
