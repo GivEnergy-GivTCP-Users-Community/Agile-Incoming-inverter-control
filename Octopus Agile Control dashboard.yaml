@@ -217,7 +217,7 @@ views:
                   - entity: input_number.target_sol_forecast
                     name: Set Sol Forecast Limit
                   - entity: input_number.target_max_price
-                    name: Set Price weight
+                    name: Set Price Weight
               - type: custom:button-card
                 color_type: blank-card
 title: Agile Control
