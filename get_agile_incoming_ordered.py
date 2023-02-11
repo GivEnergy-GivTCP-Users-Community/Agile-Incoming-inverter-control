@@ -19,7 +19,7 @@ DATETO = newdate.strftime("%Y-%m-%d")+ "T" + newdate.strftime("%H:%M") +"Z"
 
 
 # parameter items given here
-APIKEY = "sk_live_i3jDcyyrBuHfJ5CYyaxZTEwF"
+APIKEY = "your octopus api key"
 ACCOUNT = ""
 PERIOD_FROM = DATEFROM
 PERIOD_TO = DATETO
