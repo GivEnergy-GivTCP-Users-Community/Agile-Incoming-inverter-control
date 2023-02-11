@@ -52,8 +52,6 @@ sequence:
           emailtitle: "{{title}}"
           notification_id: "{{notification_id}}"
           notification_type: email
-      - service: homeassistant.turn_off
-        entity_id: script.agile_charge_battery
   - if:
       - condition: and
         conditions:
