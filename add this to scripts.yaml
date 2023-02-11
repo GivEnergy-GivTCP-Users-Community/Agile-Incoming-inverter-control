@@ -1,0 +1,18 @@
+set_solar_forecast_target:
+  alias: agile_solar_forecast_target
+  fields:
+    target_soc:
+      description: the target soc to use
+      example: 100
+  sequence:
+  - service: input_number.set_value
+    data:
+      value: '{{(states(''sensor.solcast_forecast_remaining_today'') | float(0))}}'
+    target:
+      entity_id: input_number.target_sol_forecast
+  - service: input_number.set_value
+    data:
+      value: '{{target_soc}}'
+    target:
+      entity_id: input_number.target_soc
+  mode: single
