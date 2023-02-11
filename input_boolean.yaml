@@ -1,0 +1,40 @@
+  session_1_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_1_enable
+  session_2_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_2_enable
+  session_3_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_3_enable
+  session_4_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_4_enable
+  session_5_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_5_enable
+  session_6_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_6_enable
+  session_7_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_7_enable
+  session_8_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_8_enable
+  session_9_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_9_enable
+  session_10_enable:
+    initial: off
+    icon: mdi:light-switch-off
+    name: Session_10_enable

@@ -1,0 +1,15 @@
+alias: agile_sol_check_control
+sequence:
+  - variables:
+      target_soc: >-
+        {% set solar_forecast = states(entity_solar_forecast)|float %} {% if
+        solar_forecast > 21.0 %} 10 {% elif solar_forecast > 18.0 %} 20 {% elif
+        solar_forecast > 15.0 %} 40{% elif solar_forecast > 13.0 %} 60 {% elif
+        solar_forecast > 11.0 %} 70 {% elif solar_forecast > 9.0 %} 80 {% elif
+        solar_forecast > 7.0 %} 90 {% else %} 100 {% endif %}
+  - service: script.set_solar_forecast_target
+    data:
+      target_soc: "{{ target_soc | float }} "
+variables:
+  entity_solar_forecast: sensor.solcast_forecast_remaining_today
+mode: single

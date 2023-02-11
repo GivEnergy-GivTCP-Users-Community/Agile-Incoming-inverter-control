@@ -1,0 +1,22 @@
+# Example 
+  target_max_price:
+    name: target_max_price
+    initial: 0
+    min: 0
+    max: 10
+    step: 1
+    mode: slider  
+  target_soc:
+    name: target_soc
+    initial: 0
+    min: 0
+    max: 100
+    step: 5
+    mode: slider
+  target_sol_forecast:
+    name: target_sol_forecast
+    initial: 0
+    min: 0
+    max: 100
+    step: 1
+    mode: slider

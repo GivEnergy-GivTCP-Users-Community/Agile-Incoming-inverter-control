@@ -1,0 +1,38 @@
+alias: Agile_selected_session_8
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.minutes_until_session_8
+    to: "0"
+    for:
+      hours: 00
+      minutes: 00
+      seconds: 30
+action:
+  - service: script.agile_sol_check_control
+    data: {}
+  - service: script.agile_charge_battery
+    data:
+      title: Agile Import Session 8
+      message: >-
+        session 8 ran successfully at {{"\r\n"}}'({{now().strftime("%Y-%m-%d
+        %H:%M:%S")}})' {{"\r\n"}} cost is
+        "{{states('input_text.session_8_cost')}}"
+      messagenotenabled: >-
+        Soc is higher than target or {{"\r\n"}}  session 8 not enabled
+        {{"\r\n"}}  Soc target "{{states('input_number.target_soc')}}"
+        {{"\r\n"}} enabled is "{{states('input_boolean.session_8_enable')}}"
+      messagefailstart: session 8  failed to load start time retrying
+      messagefailend: session 8  failed to load end time retrying
+      messageloadstart: >-
+        start time of "{{states('input_text.session_8_start')}}" {{"\r\n"}}
+        Loaded
+      messageloadend: end time of "{{states('input_text.session_8_end')}}" {{"\r\n"}} Loaded
+      notification_id: id-008
+      ses_detail: session_8_detail
+      ses_cost: session_8_cost
+      ses_start: session_8_start
+      ses_end: session_8_end
+      ses_enabled: session_8_enable
+mode: restart

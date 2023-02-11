@@ -1,0 +1,38 @@
+alias: Agile_selected_session_3
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.minutes_until_session_3
+    to: "0"
+    for:
+      hours: 00
+      minutes: 00
+      seconds: 30
+action:
+  - service: script.agile_sol_check_control
+    data: {}
+  - service: script.agile_charge_battery
+    data:
+      title: Agile Import Session 3
+      message: >-
+        session 3 ran successfully at {{"\r\n"}}'({{now().strftime("%Y-%m-%d
+        %H:%M:%S")}})' {{"\r\n"}} cost is
+        "{{states('input_text.session_3_cost')}}"
+      messagenotenabled: >-
+        Soc is higher than target or {{"\r\n"}}  session 3 not enabled
+        {{"\r\n"}}  Soc target "{{states('input_number.target_soc')}}"
+        {{"\r\n"}} enabled is "{{states('input_boolean.session_3_enable')}}"
+      messagefailstart: session 3  failed to load start time retrying
+      messagefailend: session 3  failed to load end time retrying
+      messageloadstart: >-
+        start time of "{{states('input_text.session_3_start')}}" {{"\r\n"}}
+        Loaded
+      messageloadend: end time of "{{states('input_text.session_3_end')}}" {{"\r\n"}} Loaded
+      notification_id: id-003
+      ses_detail: session_3_detail
+      ses_cost: session_3_cost
+      ses_start: session_3_start
+      ses_end: session_3_end
+      ses_enabled: session_3_enable
+mode: restart

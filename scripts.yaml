@@ -1,0 +1,528 @@
+turn_on_pc_light:
+  alias: Turn on PC Light
+  sequence:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id: switch.tcp_smart_plug_socket_1
+  mode: single
+  icon: mdi:light-flood-down
+agile_charge_battery:
+  alias: agile_charge_battery
+  fields:
+    title:
+      description: The title of the notification
+      example: State change
+    message:
+      description: The message content
+      example: The light is on!
+    messagenotenabled:
+      description: The message content
+      example: failed to run as not enabled!
+    messagefailstart:
+      description: The message content
+      example: system failed to load the start times!
+    messagefailend:
+      description: The message content
+      example: system failed to load the end times!
+    messageloadstart:
+      description: The message content
+      example: system loaded the start times!
+    messageloadend:
+      description: The message content
+      example: system loaded the end times!
+    notification_id:
+      description: A unique id so notification can be over written
+      example: id-001
+    ses_detail:
+      description: the session detail name
+      example: session_1_detail
+    ses_cost:
+      description: the session cost name
+      example: session_1_cost
+    ses_start:
+      description: the session start name
+      example: session_1_start
+    ses_end:
+      description: the session end name
+      example: session_1_end
+    ses_enabled:
+      description: the session enabled name
+      example: session_1_enable
+  sequence:
+  - if:
+    - condition: and
+      conditions:
+      - condition: template
+        value_template: '{{states(''input_text.''~ses_cost) | float(0) < 0}}'
+    then:
+    - service: script.agile_fail_email
+      data:
+        emailmessage: session is negative force charge enabled
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: homeassistant.turn_off
+      entity_id: script.agile_charge_battery
+  - if:
+    - condition: and
+      conditions:
+      - condition: template
+        value_template: '{{is_state(''input_boolean.''~ses_enabled, ''on'') }}'
+      - condition: template
+        value_template: '{{(states(''sensor.givtcp_ed2151g186_soc'')| float) < (states(''input_number.target_soc'')
+          | float(0)) }}'
+    then:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.givtcp_ed2151g186_enable_charge_schedule
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_start)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+    else:
+    - service: script.agile_fail_email
+      data:
+        emailmessage: '{{messagenotenabled}}'
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: homeassistant.turn_off
+      entity_id: script.agile_charge_battery
+  - if:
+    - condition: template
+      value_template: '"{{ states(''select.givtcp_ed2151g186_charge_start_time_slot_1'')
+        != states(''input_text.''~ses_start) }}"'
+    then:
+    - service: script.agile_fail_email
+      data:
+        emailmessage: '{{messagefailstart}}'
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_start)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+  - if:
+    - condition: template
+      value_template: '"{{ states(''select.givtcp_ed2151g186_charge_start_time_slot_1'')
+        != states(''input_text.''~ses_start) }}"'
+    then:
+    - service: script.agile_fail_email
+      data:
+        emailmessage: '{{messagefailstart}}'
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: hassio.addon_restart
+      data:
+        addon: a6a2857d_givtcp
+    - delay:
+        hours: 0
+        minutes: 2
+        seconds: 30
+        milliseconds: 0
+    - service: script.agile_fail_email
+      data:
+        emailmessage: giv TCP has been restarted
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_start)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+    else:
+    - service: persistent_notification.create
+      data:
+        message: '{{messageloadstart}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: gen
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 15
+        milliseconds: 0
+  - service: select.select_option
+    data:
+      option: '{{states(''input_text.''~ses_end)}}'
+    target:
+      entity_id: select.givtcp_ed2151g186_charge_end_time_slot_1
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 30
+      milliseconds: 0
+  - if:
+    - condition: template
+      value_template: '"{{ states(''select.givtcp_ed2151g186_charge_end_time_slot_1'')
+        != states(''input_text.''~ses_end) }}"'
+    then:
+    - service: script.agile_fail_email
+      data:
+        emailmessage: '{{messagefailend}}'
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_end)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_end_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+  - if:
+    - condition: template
+      value_template: '"{{ states(''select.givtcp_ed2151g186_charge_start_time_slot_1'')
+        != states(''input_text.''~ses_start) }}"'
+    then:
+    - service: script.agile_fail_email
+      data:
+        emailmessage: '{{messagefailend}}'
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: hassio.addon_restart
+      data:
+        addon: a6a2857d_givtcp
+    - delay:
+        hours: 0
+        minutes: 2
+        seconds: 30
+        milliseconds: 0
+    - service: persistent_notification.create
+      data:
+        emailmessage: giv TCP has been restarted
+        emailtitle: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: email
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_end)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 30
+        milliseconds: 0
+    else:
+    - service: persistent_notification.create
+      data:
+        message: '{{messageloadend}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+        notification_type: gen
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 15
+        milliseconds: 0
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.givtcp_ed2151g186_enable_charge_schedule
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 15
+      milliseconds: 0
+  - service: script.agile_fail_email
+    data:
+      emailmessage: '{{message}}'
+      emailtitle: '{{title}}'
+      notification_id: '{{notification_id}}'
+      notification_type: email
+  mode: single
+agile_cost_loading:
+  alias: agile_cost_loading
+  fields:
+    ses_enabled:
+      description: the session enabled name
+      example: session_1_enable
+    ses_cost:
+      description: the session cost name
+      example: session_1_cost
+  sequence:
+  - if:
+    - condition: template
+      value_template: '{{ states(''input_text.''~ses_cost)|float >= (states(''sensor.oct_ag_mean1'')|float
+        - states(''input_number.target_max_price'') | float(0)) }}'
+    then:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: '{{ ''input_boolean.''~ses_enabled }}'
+    else:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: '{{ ''input_boolean.''~ses_enabled }}'
+  mode: single
+  icon: mdi:calculator-variant
+test:
+  alias: test
+  fields:
+    title:
+      description: The title of the notification
+      example: State change
+    message:
+      description: The message content
+      example: The light is on!
+    messagenotenabled:
+      description: The message content
+      example: failed to run as not enabled!
+    messagefailstart:
+      description: The message content
+      example: system failed to load the start times!
+    messagefailend:
+      description: The message content
+      example: system failed to load the end times!
+    messageloadstart:
+      description: The message content
+      example: system loaded the start times!
+    messageloadend:
+      description: The message content
+      example: system loaded the end times!
+    notification_id:
+      description: A unique id so notification can be over written
+      example: id-001
+    ses_detail:
+      description: the session detail name
+      example: session_1_detail
+    ses_cost:
+      description: the session cost name
+      example: session_1_cost
+    ses_start:
+      description: the session start name
+      example: session_1_start
+    ses_end:
+      description: the session end name
+      example: session_1_end
+    ses_enabled:
+      description: the session enabled name
+      example: session_1_enable
+  sequence:
+  - if:
+    - condition: template
+      value_template: '{{is_state(''input_boolean.''~ses_enabled, ''on'') }}'
+    - condition: template
+      value_template: '{{(states(''sensor.givtcp_ed2151g186_soc'')| float) < (states(''input_number.target_soc'')
+        | float(0)) }}'
+    then:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.givtcp_ed2151g186_enable_charge_schedule
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 15
+        milliseconds: 0
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_start)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 1
+        seconds: 0
+        milliseconds: 0
+    else:
+    - service: persistent_notification.create
+      data:
+        message: '{{messagenotenabled}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+    - service: homeassistant.turn_off
+      entity_id: script.test
+  - if:
+    - condition: template
+      value_template: '"{{ states(''select.givtcp_ed2151g186_charge_start_time_slot_1'')
+        != states(''input_text.''~ses_start) }}"'
+    then:
+    - service: persistent_notification.create
+      data:
+        message: '{{messagefailstart}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_start)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_start_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 1
+        seconds: 0
+        milliseconds: 0
+    else:
+    - service: persistent_notification.create
+      data:
+        message: '{{messageloadstart}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 15
+        milliseconds: 0
+  - service: select.select_option
+    data:
+      option: '{{states(''input_text.''~ses_end)}}'
+    target:
+      entity_id: select.givtcp_ed2151g186_charge_end_time_slot_1
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - if:
+    - condition: template
+      value_template: '"{{ states(''select.givtcp_ed2151g186_charge_end_time_slot_1'')
+        != states(''input_text.''~ses_end) }}"'
+    then:
+    - service: persistent_notification.create
+      data:
+        message: '{{messagefailend}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+    - service: select.select_option
+      data:
+        option: '{{states(''input_text.''~ses_end)}}'
+      target:
+        entity_id: select.givtcp_ed2151g186_charge_end_time_slot_1
+    - delay:
+        hours: 0
+        minutes: 1
+        seconds: 0
+        milliseconds: 0
+    else:
+    - service: persistent_notification.create
+      data:
+        message: '{{messageloadend}}'
+        title: '{{title}}'
+        notification_id: '{{notification_id}}'
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 15
+        milliseconds: 0
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.givtcp_ed2151g186_enable_charge_schedule
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 15
+      milliseconds: 0
+  - service: persistent_notification.create
+    data:
+      message: '{{message}}'
+      title: '{{title}}'
+      notification_id: '{{notification_id}}'
+  mode: single
+agile_fail_email:
+  alias: agile_fail_email
+  fields:
+    emailtitle:
+      description: The title of the notification
+      example: State change
+    emailmessage:
+      description: The message content
+      example: The light is on!
+    notification_id:
+      description: the id used in creating the message
+      example: id_001
+    notification_type:
+      description: tells the script what type of message
+      example: email
+  sequence:
+  - service: input_text.set_value
+    data:
+      value: '{{notification_type}}'
+    target:
+      entity_id: input_text.email_enable
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ states(''input_text.email_enable'') != ''gen'' }}'
+      sequence:
+      - service: notify.give_charge
+        data:
+          message: '{{emailmessage}}'
+          title: '{{emailtitle}}'
+    - conditions:
+      - condition: template
+        value_template: '{{ states(''input_text.email_enable'') != ''email'' }}'
+      sequence:
+      - service: persistent_notification.create
+        data:
+          message: '{{emailmessage}}'
+          title: '{{emailtitle}}'
+          notification_id: '{{notification_id}}'
+  mode: single
+set_solar_forecast_target:
+  alias: agile_solar_forecast_target
+  fields:
+    target_soc:
+      description: the target soc to use
+      example: 100
+  sequence:
+  - service: input_number.set_value
+    data:
+      value: '{{(states(''sensor.solcast_forecast_remaining_today'') | float(0))}}'
+    target:
+      entity_id: input_number.target_sol_forecast
+  - service: input_number.set_value
+    data:
+      value: '{{target_soc}}'
+    target:
+      entity_id: input_number.target_soc
+  mode: single
+agile_sol_check_control:
+  alias: agile_sol_check_control
+  sequence:
+  - variables:
+      target_soc: '{% set solar_forecast = states(entity_solar_forecast)|float %}
+        {% if solar_forecast > 21.0 %} 10 {% elif solar_forecast > 18.0 %} 20 {% elif
+        solar_forecast > 15.0 %} 40{% elif solar_forecast > 13.0 %} 60 {% elif solar_forecast
+        > 11.0 %} 70 {% elif solar_forecast > 9.0 %} 80 {% elif solar_forecast > 7.0
+        %} 90 {% else %} 100 {% endif %}'
+  - service: script.set_solar_forecast_target
+    data:
+      target_soc: '{{ target_soc | float }} '
+  variables:
+    entity_solar_forecast: sensor.solcast_forecast_remaining_today
+  mode: single

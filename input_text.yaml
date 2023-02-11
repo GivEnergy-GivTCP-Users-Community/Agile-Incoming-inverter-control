@@ -1,0 +1,201 @@
+# Example configuration.yaml entry
+  session_1_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_1_cost
+  session_1_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_1_detail
+  session_1_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_1_end
+  session_1_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_1_start
+  session_2_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_2_cost
+  session_2_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_2_detail
+  session_2_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_2_end
+  session_2_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_2_start
+  session_3_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_3_cost
+  session_3_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_3_detail
+  session_3_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_3_end
+  session_3_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_3_start
+  session_4_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_4_cost
+  session_4_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_4_detail
+  session_4_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_4_end
+  session_4_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_4_start
+  session_5_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_5_cost
+  session_5_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_5_detail
+  session_5_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_5_end
+  session_5_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_5_start
+  session_6_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_6_cost
+  session_6_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_6_detail
+  session_6_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_6_end
+  session_6_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_6_start
+  session_7_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_7_cost
+  session_7_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_7_detail
+  session_7_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_7_end
+  session_7_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_7_start
+  session_8_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_8_cost
+  session_8_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_8_detail
+  session_8_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_8_end
+  session_8_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_8_start
+  session_9_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_9_cost
+  session_9_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_9_detail
+  session_9_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_9_end
+  session_9_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_9_start
+  session_10_cost:
+    min: 0
+    max: 100
+    mode: text
+    name: session_10_cost
+  session_10_detail:
+    min: 0
+    max: 100
+    mode: text
+    name: session_10_detail
+  session_10_end:
+    min: 0
+    max: 100
+    mode: text
+    name: session_10_end
+  session_10_start:
+    min: 0
+    max: 100
+    mode: text
+    name: session_10_start

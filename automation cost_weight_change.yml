@@ -1,0 +1,49 @@
+alias: cost_weight_change
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - input_number.target_max_price
+condition: []
+action:
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_1_cost
+      ses_enabled: session_1_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_2_cost
+      ses_enabled: session_2_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_3_cost
+      ses_enabled: session_3_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_4_cost
+      ses_enabled: session_4_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_5_cost
+      ses_enabled: session_5_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_6_cost
+      ses_enabled: session_6_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_7_cost
+      ses_enabled: session_7_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_8_cost
+      ses_enabled: session_8_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_9_cost
+      ses_enabled: session_9_enable
+  - service: script.agile_cost_loading
+    data:
+      ses_cost: session_10_cost
+      ses_enabled: session_10_enable
+mode: single

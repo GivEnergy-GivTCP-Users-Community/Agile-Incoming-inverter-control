@@ -1,0 +1,39 @@
+alias: agile_fail_email
+fields:
+  emailtitle:
+    description: The title of the notification
+    example: State change
+  emailmessage:
+    description: The message content
+    example: The light is on!
+  notification_id:
+    description: the id used in creating the message
+    example: id_001
+  notification_type:
+    description: tells the script what type of message
+    example: email
+sequence:
+  - service: input_text.set_value
+    data:
+      value: "{{notification_type}}"
+    target:
+      entity_id: input_text.email_enable
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ states('input_text.email_enable') != 'gen' }}"
+        sequence:
+          - service: notify.give_charge
+            data:
+              message: "{{emailmessage}}"
+              title: "{{emailtitle}}"
+      - conditions:
+          - condition: template
+            value_template: "{{ states('input_text.email_enable') != 'email' }}"
+        sequence:
+          - service: persistent_notification.create
+            data:
+              message: "{{emailmessage}}"
+              title: "{{emailtitle}}"
+              notification_id: "{{notification_id}}"
+mode: single
