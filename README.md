@@ -1,7 +1,4 @@
 # Agile-Incoming-inverter-control
 Holding area for automation
 
-
-
-![image](https://user-images.githubusercontent.com/115955610/218300932-aa2277c6-56fd-4437-afc2-7a7745699664.png)
-
+![image](https://user-images.githubusercontent.com/115955610/218301469-6bb1af98-5d3e-4bef-a5f7-c90be1f7a60c.png)
