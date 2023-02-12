@@ -12,10 +12,10 @@ TARIFF_CODE = "E-1R-" + PRODUCT_CODE + "-B" # change  the "-B" bit to match your
 TARIFF_URL = BASE_URL + "/v1/products/" + PRODUCT_CODE + "/electricity-tariffs/" + TARIFF_CODE
   
 #setting the time
-now = datetime.now() + timedelta(days = 0)
-DATEFROM = now.strftime("%Y-%m-%d")+ "T" + now.strftime("%H:%M") +"Z"
-newdate = now + timedelta(hours=25)
-DATETO = newdate.strftime("%Y-%m-%d")+ "T" + newdate.strftime("%H:%M") +"Z"
+now = datetime.now()+ timedelta(days = 0)
+DATEFROM = now.strftime("%Y-%m-%d")+ "T00:00Z"
+newdate = now + timedelta(days = 1)
+DATETO = newdate.strftime("%Y-%m-%d")+ "T00:00Z"
 
 
 # parameter items given here
