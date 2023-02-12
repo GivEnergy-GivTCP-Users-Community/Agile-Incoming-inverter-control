@@ -26,7 +26,7 @@ action:
       messagefailstart: session 1  failed to load start time retrying
       messagefailend: session 1  failed to load end time retrying
       messageloadstart: >-
-        start time of "{{states('input_text.session_2_start')}}" {{"\r\n"}} 
+        start time of "{{states('input_text.session_1_start')}}" {{"\r\n"}} 
         Loaded
       messageloadend: end time of "{{states('input_text.session_1_end')}}" {{"\r\n"}} Loaded
       notification_id: id-001
