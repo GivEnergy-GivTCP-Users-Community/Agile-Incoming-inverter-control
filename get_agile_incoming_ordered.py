@@ -13,9 +13,9 @@ TARIFF_URL = BASE_URL + "/v1/products/" + PRODUCT_CODE + "/electricity-tariffs/"
   
 #setting the time
 now = datetime.now()+ timedelta(days = 0)
-DATEFROM = now.strftime("%Y-%m-%d")+ "T00:00Z"
+DATEFROM = now.strftime("%Y-%m-%d")+ "T16:00Z"
 newdate = now + timedelta(days = 1)
-DATETO = newdate.strftime("%Y-%m-%d")+ "T00:00Z"
+DATETO = newdate.strftime("%Y-%m-%d")+ "T17:00Z"
 
 
 # parameter items given here
