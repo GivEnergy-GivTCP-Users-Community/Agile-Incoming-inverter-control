@@ -8,7 +8,10 @@ from datetime import datetime, timedelta
 # api-endpoint
 BASE_URL = "https://api.octopus.energy"
 PRODUCT_CODE = "AGILE-FLEX-22-11-25"
-TARIFF_CODE = "E-1R-" + PRODUCT_CODE + "-B" # change  the "-B" bit to match your region code
+# change  the "-B" bit to match your region code
+REGION = "-B"
+##############
+TARIFF_CODE = "E-1R-" + PRODUCT_CODE + REGION 
 TARIFF_URL = BASE_URL + "/v1/products/" + PRODUCT_CODE + "/electricity-tariffs/" + TARIFF_CODE
   
 #setting the time
@@ -19,7 +22,7 @@ DATETO = newdate.strftime("%Y-%m-%d")+ "T17:00Z"
 
 
 # parameter items given here
-APIKEY = "your octopus api key"
+APIKEY = "your octopus api key" # add your octopus key
 ACCOUNT = ""
 PERIOD_FROM = DATEFROM
 PERIOD_TO = DATETO
@@ -27,9 +30,11 @@ PERIOD_TO = DATETO
 # defining the outgoing url
 URL = TARIFF_URL + "/standard-unit-rates/?" + "period_from=" + PERIOD_FROM + "&period_to=" + PERIOD_TO
 
+#### debug url #####
 #print(URL)
+#### end debug ####
   
-# sending Post request and saving the response as inspire key
+# sending Get request
 r = requests.get(URL, auth=(APIKEY,''))
 
 # need to add error check R = 200 go r= <> 200 stop
