@@ -3,8 +3,13 @@
 # importing the requests library
 import requests
 import json
+from dateutil import tz
 from datetime import datetime, timedelta
-  
+
+#setup timezone
+from_zone = tz.gettz('UTC')
+to_zone = tz.gettz('Europe/London')
+
 # api-endpoint
 BASE_URL = "https://api.octopus.energy"
 PRODUCT_CODE = "AGILE-FLEX-22-11-25"
@@ -18,7 +23,7 @@ TARIFF_URL = BASE_URL + "/v1/products/" + PRODUCT_CODE + "/electricity-tariffs/"
 now = datetime.now()+ timedelta(days = 0)
 DATEFROM = now.strftime("%Y-%m-%d")+ "T16:00Z"
 newdate = now + timedelta(days = 1)
-DATETO = newdate.strftime("%Y-%m-%d")+ "T17:00Z"
+DATETO = newdate.strftime("%Y-%m-%d")+ "T18:00Z"
 
 
 # parameter items given here
@@ -85,7 +90,10 @@ if r.status_code == 200:
          max_rate = 'max_rate' + str(y)
          mean_rate = 'mean_rate' + str(y)
          start_date = str(datetime.fromisoformat(item['from'][:-1]))
-         startdate = datetime.fromisoformat(item['from'][:-1])
+         start_date_tz = datetime.fromisoformat(item['from'][:-1])
+         start_date_nz = start_date_tz.replace(tzinfo=from_zone)
+         startdate = start_date_nz.astimezone(to_zone)
+         start_date = str(startdate.strftime("%Y-%m-%d %H:%M"))
          start_time = startdate.strftime("%H:%M")+ ":00"
          enddate = startdate + timedelta(minutes=30)
          end_time = enddate.strftime("%H:%M")+ ":00"
