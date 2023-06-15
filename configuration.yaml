@@ -130,56 +130,57 @@ sensor:
             
 # command line entries 
 
- - platform: command_line
-   command: "python3 /config/pyscripts/get_agile_incoming_ordered.py"
-   scan_interval: 315360000 
-   value_template: '{{value_json.Run_number1}}'
-   json_attributes:
-      - Run_number1
-      - Run_number2
-      - Run_number3
-      - Run_number4
-      - Run_number5
-      - Run_number6
-      - Run_number7
-      - Run_number8
-      - Run_number9
-      - Run_number10
-      - cost_number1
-      - cost_number2
-      - cost_number3
-      - cost_number4
-      - cost_number5
-      - cost_number6
-      - cost_number7
-      - cost_number8
-      - cost_number9
-      - cost_number10
-      - start_time1
-      - start_time2
-      - start_time3
-      - start_time4
-      - start_time5
-      - start_time6
-      - start_time7
-      - start_time8
-      - start_time9
-      - start_time10
-      - end_time1
-      - end_time2
-      - end_time3
-      - end_time4
-      - end_time5
-      - end_time6
-      - end_time7
-      - end_time8
-      - end_time9
-      - end_time10
-      - min_rate1
-      - max_rate1
-      - mean_rate1
-   name: octopus_agile_range_ordered
-   unique_id: octagrangeinord1
+command_line:
+  - sensor:
+      command: "python3 /config/pyscripts/get_agile_incoming_ordered.py"
+      scan_interval: 315360000 
+      value_template: '{{value_json.Run_number1}}'
+      json_attributes:
+        - Run_number1
+        - Run_number2
+        - Run_number3
+        - Run_number4
+        - Run_number5
+        - Run_number6
+        - Run_number7
+        - Run_number8
+        - Run_number9
+        - Run_number10
+        - cost_number1
+        - cost_number2
+        - cost_number3
+        - cost_number4
+        - cost_number5
+        - cost_number6
+        - cost_number7
+        - cost_number8
+        - cost_number9
+        - cost_number10
+        - start_time1
+        - start_time2
+        - start_time3
+        - start_time4
+        - start_time5
+        - start_time6
+        - start_time7
+        - start_time8
+        - start_time9
+        - start_time10
+        - end_time1
+        - end_time2
+        - end_time3
+        - end_time4
+        - end_time5
+        - end_time6
+        - end_time7
+        - end_time8
+        - end_time9
+        - end_time10
+        - min_rate1
+        - max_rate1
+        - mean_rate1
+      name: octopus_agile_range_ordered
+      unique_id: octagrangeinord1
 
 
 notify:
