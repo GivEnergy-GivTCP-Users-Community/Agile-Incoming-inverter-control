@@ -12,12 +12,18 @@ to_zone = tz.gettz('Europe/London')
 
 # api-endpoint
 BASE_URL = "https://api.octopus.energy"
-PRODUCT_CODE = "AGILE-FLEX-22-11-25"
+##########################################################
+### the following you need to find in your octopus account
+PRODUCT_CODE = "AGILE-24-10-01"
+##########################################################
 # change  the "-B" bit to match your region code
 REGION = "-B"
 ##############
 TARIFF_CODE = "E-1R-" + PRODUCT_CODE + REGION 
 TARIFF_URL = BASE_URL + "/v1/products/" + PRODUCT_CODE + "/electricity-tariffs/" + TARIFF_CODE
+
+# test url get tariffs https://api.octopus.energy/v1/products/. 
+#TARIFF_URL = "https://api.octopus.energy/v1/products/."
   
 #setting the time
 now = datetime.now()+ timedelta(days = 0)
@@ -27,20 +33,18 @@ DATETO = newdate.strftime("%Y-%m-%d")+ "T18:00Z"
 
 
 # parameter items given here
-APIKEY = "your octopus api key" # add your octopus key
-ACCOUNT = ""
 PERIOD_FROM = DATEFROM
 PERIOD_TO = DATETO
 
 # defining the outgoing url
 URL = TARIFF_URL + "/standard-unit-rates/?" + "period_from=" + PERIOD_FROM + "&period_to=" + PERIOD_TO
-
+#URL = TARIFF_URL
 #### debug url #####
 #print(URL)
 #### end debug ####
   
 # sending Get request
-r = requests.get(URL, auth=(APIKEY,''))
+r = requests.get(URL)
 
 # need to add error check R = 200 go r= <> 200 stop
 
